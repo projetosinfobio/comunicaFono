@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<!-- B2: Script para menu -->
+<script>
+  var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
+
+
+    TxtType.prototype.tick = function() {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+
+        if (this.isDeleting) {
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+        var that = this;
+        var delta = 200 - Math.random() * 100;
+
+        if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+        }
+
+        setTimeout(function() {
+        that.tick();
+        }, delta);
+    };
+
+    function textos() {
+        var elements = document.getElementsByClassName('typewrite');
+        for (var i=0; i<elements.length; i++) {
+            var toRotate = elements[i].getAttribute('data-type');
+            var period = elements[i].getAttribute('data-period');
+            if (toRotate) {
+              new TxtType(elements[i], JSON.parse(toRotate), period);
+            }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
+        document.body.appendChild(css);
+    };
+</script>
+
+<!-- Inicio da estrutura do site -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Comunica Fono Jr.">
+
+    <!-- Script para o Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141202748-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-141202748-1');
+    </script>
+
+    <!-- Icone da aba do site -->
+    <link rel="shortcut icon" href="img\logo_comunica.png" type="image/png">
+    <link rel="icon" href="img\logo_comunica.png" type="image/png">
+
+    <title>Comunica Fono Jr.</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/agency.min.css" rel="stylesheet">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130731311-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-130731311-1');
+  </script>
+
+  </head>
+
+  <!-- Assim que a página for carregada, todas informações de cada membros serão colocados -->
+  <body id="page-top" onload="textos(); infoMembros();">
+
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand js-scroll-trigger" href="#page-top">Comunica Fono Jr.</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ml-auto">
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#about">Quem Somos</a>
+              </li>
+              <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#empresajr">Empresa Júnior</a>
+                  </li>  
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#services">Serviços</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#contato">Contato</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+    <!-- Header -->
+    <header class="masthead">
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-lead-in">
+          </br>
+          </div>
+          <div class="intro-heading">
+          </br>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Seção: Texto Inicial -->
+    <section class="py-4">
+      <div class="container">
+        <p class="intro-text text-center" style="font-size: 20px">
+      
+          A Comunica Fono Jr. busca promover o desenvolvimento das competências comunicativas de cada indivíduo, aprimorando suas habilidades de comunicação e alcançando o orador em potencial de cada um.
+          </br>
+          Fazemos serviços personalizados e individualizados, prezando pela qualidade na realização de seus projetos.
+        </p>
+      </div>
+    </section>
+
+    <!-- Seção: Quem somos -->
+    <section class="py-4" id="about">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <h2 class="section-heading text">Quem somos</h2>
+              <p class="intro-text">
+                  A Comunica Fono Jr. foi criada na Faculdade de Medicina de Ribeirão Preto da Universidade de São Paulo (FMRP-USP).</br> 
+                  Iniciou suas atividades em novembro de 2011, por iniciativa dos alunos da graduação do curso de Fonoaudiologia da e tem o apoio da docente Profª Drª Aline Epiphanio Wolf, especialista na área de voz.
+
+              </p>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-4">
+              <img class="" src="img/about/icone-missao-1.png" alt="" style="width:250px;height:250px;">
+              <p class="text-muted">Desenvolver sistemas computacionais na área da saúde para clientes interessados em inovação e qualidade, proporcionando aos nossos membros uma inserção no mercado de trabalho ainda na graduação.</p>
+            </div>
+            <div class="col-md-4">
+              <img class="" src="img/about/icone-visao-1.png" alt="" style="width:250px;height:250px;">
+              <p class="text-muted">Consolidar-se como empresa na área de informática biomédica, capacitando os alunos para atuarem no mercado.</p>
+            </div>
+            <div class="col-md-4">
+              <img class="" src="img/about/icone-valores-1.png" alt="" style="width:250px;height:250px;">
+              <p class="text-muted">Trabalho em equipe, Comprometimento, Iniciativa, Qualidade e Inovação.</p>
+            </div>
+          </div>
+        </div>
+    </section>  
+
+
+
+    </div>
+  </section>
+    
+    <!-- Seção: Movimento Empresa Júnior -->
+  <section class="py-4 bg-light" id="empresajr">
+    <div class="container">
+  
+      <div class="row"> <!-- Cabeçalho Movimento Empresa Júnior -->
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text"> Movimento Empresa Júnior </h2>
+          <br>
+        </div>
+      </div>
+  
+      <div class="row"> 
+        <div class="col-md-2">
+        </div>
+          <div class="col-md-4">
+              <img class="img-fluid" src="img/nucleo-saocarlos.png" alt="" height="196" width="196">
+          </div>
+          <div class="col-md-6">
+              <div class="portfolio-caption">
+                  <p>Uma empresa júnior é gerida por alunos, estudantes da graduação, que visam aprimorar os
+                      conhecimentos em sua área, através de uma vivência plena na área empresarial, realizando
+                      projetos que impactem o ecossistema.</p>
+                  <p class="text-muted">Atualmente, a Comunica Fono Jr. é filiada ao Núcleo São Carlos. </p>
+                </div>
+          </div>
+  
+        </div>  
+      </div> <!-- Fim da linha que contém sobre o Movimento Empresa Júnior -->
+    </div> <!-- Fim container -->
+  </section>
+
+    <!-- Servicos -->
+    <section class="py-4" id="services">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <h2 class="section-heading text-uppercase">Serviços</h2>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-6">
+              <img class="" src="img\servicos\Capturar5.png" alt="" height="196" width="196">
+              <h4 class="service-heading">Comunicação Oral</h4>
+              <p class="text-muted"> 
+                Um curso que objetiva a capacitação dos indivíduos para falar em público, abordando
+                  teorias, experiências e estratégias as quais podem ser praticadas durante e anteriormente
+                  às experiências de oratória do comunicador; expondo diversas temáticas, tais como:
+                </br>
+                  - Diferença entre uma fala em público e uma fala interpessoal</br>
+                  - Como combater o medo</br>
+                  - Preparação</br>
+                  - Confiança</br>
+                  - Estratégias vocais e corporais</br>
+                  - Entre outras...</br>
+                   </p>
+            </div>
+            <div class="col-md-6">
+              <img class="" src="img\servicos\Capturar6.png" alt="" height="196" width="196">
+              <h4 class="service-heading">Comunicação Oral com Ênfase em Liderança</h4>
+              <p class="text-muted"> 
+                Um curso que objetiva a capacitação de líderes e oferece estratégias as quais diferenciam o
+                  modo como um líder se porta diante de sua equipe, obtendo resultados mais efetivos no
+                  engajamento e produtividade dos seus colaboradores, através dos seguintes conteúdos:</br>
+                  - Como proceder o discurso diante de opiniões divergentes</br>
+                  - Como demonstrar acessibilidade da liderança perante execução dos serviços</br>
+                  - Quais são as atitudes de um líder diante de situações de fracasso</br>
+                  - Comunicação clara e adequada à equipe</br>
+                  - Projeção da voz a ser utilizada de acordo com as diferentes situações decorrentes </br>
+                </p>
+            </div>
+            
+          </div>
+          <div class="row text-center">
+            <div class="col-md-6">
+              <img class="" src="img\servicos\Capturar7.png" alt="" height="196" width="196">
+              <h4 class="service-heading">Consultoria em Performance Comunicativa</h4>
+              <p class="text-muted"> 
+                A consultoria busca aprimorar as habilidades comunicativas de acordo com as
+                  necessidades e finalidades levantadas pelo cliente. Esta é ministrada em etapas :</br>
+                  - Entrevista individual para levantamento das dores do cliente.</br>
+                  - É composta pela gravação de vídeo de um dado tema, fornecido pela empresa ou a
+                  escolha do indivíduo, a depender da análise do caso.</br>
+                  - O vídeo é avaliado minuciosamente pelos membros da empresa, oferecendo um
+                  feedback, relatando todas as dificuldades apresentadas.</br>
+                  - Ocorrerá de três a cinco encontros para trabalhar todas as necessidades relatadas e
+                  avaliadas, de acordo com a demanda do cliente.</br>
+                   </p>
+            </div>
+            <div class="col-md-6">
+              <img class="" src="img\servicos\Capturar8.png" alt="" height="196" width="196">
+              <h4 class="service-heading">Consultoria em Performance Vocal</h4>
+              <p class="text-muted"> A consultoria em voz profissional consiste em um treinamento com estratégias
+                  concernentes à bons hábitos vocais para aqueles profissionais que dependem da voz em
+                  suas atividades laborais. </br>
+                  Treinamento com ênfase em:</br>
+                  - Dinâmicas</br>
+                  - Demanda vocal</br>
+                  - Prevenção</br>
+                  - Alterações vocais</br>
+                  - Exercícios de voz</br>
+                  - Saúde vocal</br>
+                  - Triagem Vocal</br>
+                  - Análise de voz e qualidade vocal utilizando o VoxMetria</br>
+                  - Entrega de um relatório personalizado</br>
+                 </p>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- LOCALIZACAO E CONTATO -->
+    <section class="py-4" id="contato">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <form id="contactForm" name="sentMessage" novalidate>
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- Localizacao -->
+                  <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase">Localização</h2>
+                  </div>
+
+                  <!-- Map -->
+                  <div id="contact1" class="map">
+                    <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.4738314397146!2d-47.8612676842537!3d-21.173327983639187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b9bdc69477b9fd%3A0x93e5b81235022b0e!2sAv.+Bandeirantes%2C+Ribeir%C3%A3o+Preto+-+SP!5e0!3m2!1sen!2sbr!4v1521490073260"></iframe>
+                    <br/>
+                    <small>
+                      <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.4738314397146!2d-47.8612676842537!3d-21.173327983639187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b9bdc69477b9fd%3A0x93e5b81235022b0e!2sAv.+Bandeirantes%2C+Ribeir%C3%A3o+Preto+-+SP!5e0!3m2!1sen!2sbr!4v1521490073260"></a>
+                    </small>
+                  </div>
+
+                  <!-- TODO/ANOTACAO/ARRUMAR: colocar os textos do lado do icone -->
+                  <div class="single contact-info">
+          <br>
+          <div class="container">
+            <div class="row">
+              <p>
+                <div class="icon"><i class="fa fa-map-marker"></i></div>&nbsp; &nbsp;
+                <div class="info">Avenida Bandeirantes, Nº3900 </div>
+                <div class="info">Vila Monte Alegre– Ribeirão Preto(SP)</div>
+                <div class="info">CEP: 14049-900</div>
+              </p>
+            </div>
+            <br>
+            
+            <div class="row">
+              <div class="icon"><i class="fa fa-envelope"></i></div> &nbsp; &nbsp;
+              <div class="info"><p>comunicafonojr@gmail.com</p></div>
+            </div>
+            
+            <div class="row">
+              <div class="icon"> <i class="fa fa-facebook"></i> </div> &nbsp; &nbsp;
+              <div class="info"> <p> <a href="https://www.facebook.com/comunicafonojr/">www.facebook.com/comunicafonojr/</a> </p> </div>
+            </div>
+          </div>
+                  </div>
+                </div>
+
+                <!-- Contato -->
+                <div class="col-md-6">
+                  <div class="col-lg-12 text-center">
+										<h2 class="section-heading text-uppercase">Contato</h2>
+									</div>
+                    <form  id="form1" name="form1" method="post" action="mail\contact_me.php">
+  										<div class="form-group">
+  											<input class="form-control" id="name" name="name" type="text" placeholder="Seu nome *" required data-validation-required-message="Por favor coloque seu nome.">
+  											<p class="help-block text-danger"></p>
+  										</div>
+  										<div class="form-group">
+  											<input class="form-control" id="email" name="email" type="email" placeholder="Seu Email *" required data-validation-required-message="Por favor coloque seu email.">
+  											<p class="help-block text-danger"></p>
+  										</div>
+  										<div class="form-group">
+  											<input class="form-control" id="assunto" name="assunto" type="text" placeholder="Assunto *" required data-validation-required-message="Por favor coloque o Assunto.">
+  											<p class="help-block text-danger"></p>
+  										</div>
+  										<div class="form-group">
+  											<textarea class="form-control" id="message" name="message" placeholder="Sua mensagem *" required data-validation-required-message="Por favor coloque sua mensagem."></textarea>
+  											<p class="help-block text-danger"></p>
+  										</div>
+  											<input name="submit" id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit" value="Enviar mensagem" />
+                    </form>
+                <div class="clearfix"></div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <span class="copyright">Copyright &copy;  2018 InfoBio Júnior. Todos os direitos reservados.</span>
+          </div>
+          <div class="col-md-6">
+            <ul class="list-inline quicklinks">
+              <li class="list-inline-item">
+                <a href="#">Privacy Policy</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">Terms of Use</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/agency.min.js"></script>
+
+  </body>
+
+</html>
